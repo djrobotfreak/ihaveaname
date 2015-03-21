@@ -9,7 +9,7 @@
  */
 angular.module('ihaveanameApp')
   .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
+    $scope.tweets = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
