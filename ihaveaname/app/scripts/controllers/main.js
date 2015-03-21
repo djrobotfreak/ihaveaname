@@ -11,7 +11,7 @@ angular.module('ihaveanameApp')
   .controller('MainCtrl', function ($scope, tweet) {
     tweet.getTweet();
     
-    $scope.on('tweetReady', function(tweet) {
+    $scope.$on('tweetReady', function(tweet) {
         $scope.tweet = tweet;
     });
     $scope.testTweet = function() {
