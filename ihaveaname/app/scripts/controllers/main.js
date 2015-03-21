@@ -8,13 +8,11 @@
  * Controller of the ihaveaname2App
  */
 angular.module('ihaveanameApp')
-  .controller('MainCtrl', function ($scope, tweet) {
-    tweet.getTweet();
-    
-    $scope.$on('tweetReady', function(tweet) {
+  .controller('MainCtrl', function ($scope, tweet, $rootScope) {
+    $scope.$on('tweetReady', function(blah, tweet) {
+        console.log('slartibartfast', tweet);
         $scope.tweet = tweet;
     });
-    $scope.testTweet = function() {
-        tweet.getTweet();
-    }
+    
+    tweet.getTweet();
   });
