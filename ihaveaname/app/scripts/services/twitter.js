@@ -12,18 +12,15 @@ angular.module('ihaveanameApp')
     // Public API here
     return {
       getTweet: function () {
-        var cookie = JSON.parse(document.cookie || '-1');
-                  
-        //$http.post('http://192.168.13.23/trafik/api/twitter/gettaghistorybyid', JSON.stringify({historyid:lastTweet})).
-        $http.get('http://192.168.13.23/trafik/api/twitter/gettaghistorybyid/0'). // + cookie).
+        var cookie = JSON.parse(document.cookie || '0');
+
+        $http.get('http://192.168.13.23/trafik/api/twitter/gettaghistorybyid/' + cookie).
             success(function(data, status, headers, config) {
                 console.log('zaphod', data);
-                //document.cookie = JSON.stringify(data.id);
                 $rootScope.$broadcast('tweetReady', data);
             }).
             error(function(data, status, headers, config) {
                 $rootScope.$broadcast('tweetError');
-                console.log(data, status, headers, config);
             });
       }
     };

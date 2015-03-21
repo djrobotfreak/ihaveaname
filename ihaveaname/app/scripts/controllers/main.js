@@ -10,7 +10,6 @@
 angular.module('ihaveanameApp')
   .controller('MainCtrl', function ($scope, tweet, $rootScope) {
     $scope.$on('tweetReady', function(blah, tweet) {
-        console.log('slartibartfast', tweet);
         $scope.tweet = tweet;
     });
     
