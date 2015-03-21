@@ -8,10 +8,13 @@
  * Controller of the ihaveaname2App
  */
 angular.module('ihaveanameApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.tweets = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('MainCtrl', function ($scope, tweet) {
+    tweet.getTweet();
+    
+    $scope.on('tweetReady', function(tweet) {
+        $scope.tweet = tweet;
+    });
+    $scope.testTweet = function() {
+        tweet.getTweet();
+    }
   });
