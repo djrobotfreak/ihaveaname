@@ -1,0 +1,14 @@
+2015-03-21 02:55:48.115 ihaveaname[13297:537109] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/Derek/Library/Developer/CoreSimulator/Devices/43C03A42-22CE-4B6D-A52F-2215D8A02165/data/Containers/Data/Application/E2295677-BF02-4578-B9DF-C1CCD283BA67/Library/Cookies/Cookies.binarycookies
+2015-03-21 02:55:48.197 ihaveaname[13297:537109] Apache Cordova native platform version 3.7.0 is starting.
+2015-03-21 02:55:48.198 ihaveaname[13297:537109] Multi-tasking -> Device: YES, App: YES
+2015-03-21 02:55:48.201 ihaveaname[13297:537109] Unlimited access to network resources
+2015-03-21 02:55:48.204 ihaveaname[13297:537109] 
+
+Started backup to iCloud! Please be careful.
+Your application might be rejected by Apple if you store too much data.
+For more information please read "iOS Data Storage Guidelines" at:
+https://developer.apple.com/icloud/documentation/data-storage/
+To disable web storage backup to iCloud, set the BackupWebStorage preference to "local" in the Cordova config.xml file
+
+2015-03-21 02:55:48.457 ihaveaname[13297:537109] Resetting plugins due to page load.
+2015-03-21 02:55:48.907 ihaveaname[13297:537109] Finished load of: file:///Users/Derek/Library/Developer/CoreSimulator/Devices/43C03A42-22CE-4B6D-A52F-2215D8A02165/data/Containers/Bundle/Application/26989415-5CBC-41F9-9E9D-BDEFC8F17959/ihaveaname.app/www/index.html#/
