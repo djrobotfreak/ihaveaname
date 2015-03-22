@@ -1,0 +1,18 @@
+<ion-view view-title="Dashboard">
+  <ion-content class="padding">
+    <div class="list card">
+      <div class="item item-body">
+        <div>
+          {{tweet.text}}
+        </div>
+      </div>
+      <div id="tweetactions" class="item item-divider">
+        <button class="button button-block button-dark">
+          Skip
+        </button><button class="button button-block button-positive" ng-click="openModal()">
+          Bomb
+        </button>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

@@ -1,1 +1,6 @@
 /* Empty. Add your own CSS if you like */
+#tweetactions{padding:0px;}
+#tweetactions button{width:50%; display:inline-block; margin:0px;}
+#sendtweet{margin:0px 10px;}
+.tlink{color:blue;}
+.thash{font-weight:bold;}
