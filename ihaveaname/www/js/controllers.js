@@ -1,13 +1,23 @@
 angular.module('starter.controllers', [])
 
-.controller('tweetCtrl', function($scope, tweet, $ionicModal, $sce) {
+<<<<<<< HEAD
+.controller('tweetCtrl', function($scope, tweet, $ionicModal, $ionicPlatform, $twitterOAuth, $sce) {
   $scope.tweets = [];
 	$scope.$on('tweetReady', function(blah, tweet) {
 	    $scope.tweets.push(tweet);
 	});
+  $scope.$on('retweetsReady', function(scopeInfo, replies) {
+    $scope.replies = replies;
+  });
 	tweet.getTweet();
   tweet.getTweet();
   tweet.getTweet();
+  $ionicPlatform.ready(function() {
+     $twitterOAuth.init('itfTbo4Uoq9pRKxu3dtYAgq9i', 'SSqoAzrcqtMeNoB54kRV0HdMzMHQBzXgBgsoiLtDoP7TkteLe6');
+     $twitterOAuth.connect().then(function(data) {
+       alert('yay');
+     });
+  });
   // $ionicModal.fromTemplateUrl('templates/tweetout.html', {
   //   scope: $scope,
   //   animation: 'slide-in-up'
@@ -19,6 +29,23 @@ angular.module('starter.controllers', [])
     $scope.tweets.splice(0, 1);
   }
   
+// .controller('DashCtrl', function($scope, $ionicPlatform, tweet, $twitterOAuth) {
+// 	$scope.$on('tweetReady', function(scopeInfo, tweet) {
+// 	  $scope.tweet = tweet;
+// 	});
+// 	$scope.$on('retweetsReady', function(scopeInfo, replies) {
+// 	  $scope.replies = replies;
+// 	});
+  
+//   $ionicPlatform.ready(function() {
+//        $twitterOAuth.init('itfTbo4Uoq9pRKxu3dtYAgq9i', 'SSqoAzrcqtMeNoB54kRV0HdMzMHQBzXgBgsoiLtDoP7TkteLe6');
+//        $twitterOAuth.connect().then(function(data) {
+//          alert('yay');
+//        });
+//   });
+// })
+// >>>>>>> OAuth work.
+
   $scope.openModal = function(){
     if (!$scope.modal){
       console.log('no modal');
