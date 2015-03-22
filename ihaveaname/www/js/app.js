@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngResource', 'ngCordova', 'twitter-oauth'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -38,12 +38,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
   // Each tab has its own nav history stack:
 
-  .state('tab.tweet', {
-    url: '/tweet',
+  .state('tab.dash', {
+    url: '/dash',
     views: {
-      'tab-tweet': {
-        templateUrl: 'templates/tab-tweet.html',
-        controller: 'tweetCtrl'
+      'tab-dash': {
+        templateUrl: 'templates/tab-dash.html',
+        controller: 'DashCtrl'
       }
     }
   })
@@ -67,17 +67,23 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     })
 
-  .state('tab.share', {
-    url: '/share',
+  .state('tab.account', {
+    url: '/account',
     views: {
-      'tab-share': {
-        templateUrl: 'templates/tab-share.html',
-        controller: 'shareCtrl'
+      'tab-account': {
+        templateUrl: 'templates/tab-account.html',
+        controller: 'AccountCtrl'
       }
     }
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/tweet');
+  $urlRouterProvider.otherwise('/tab/dash');
 
+});
+
+$(document).ready(function () {
+  $(body).on("click", "img", function () {
+    console.log("test");
+  });
 });

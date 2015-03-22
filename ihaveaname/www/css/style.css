@@ -1,8 +1,58 @@
 /* Empty. Add your own CSS if you like */
-#tweetactions{padding:0px;}
-#tweetactions button{width:50%; display:inline-block; margin:0px;}
-#sendtweet{margin:0px 10px;}
-.tlink{color:blue;}
-.thash{font-weight:bold;}
-.tab-item{padding-top:5px;}
-.title{font-weight: bold;}
+md-card {
+	padding: 0px !important;
+}
+div {
+	padding: 0px !important;
+}
+
+/*@media all and (min-width: 501px) {
+	#bgirl11 {
+		background: url('../img/bgirl11.jpg');
+		width:100px;
+		height:131px;
+	}
+}
+
+@media all and (max-width: 501px) {
+	#bgirl11 {
+		background: url('../img/bgirl11.jpg');
+		width:100px;
+		height:131px;
+	}
+}*/
+
+#girl2, #girl1, #girl9, #girl6 {
+	height: 100px !important;
+	filter: grayscale(100%);
+	-webkit-filter: grayscale(100%)
+}
+#girl10{
+	height: 51px !important;
+	-webkit-filter: grayscale(100%);
+}
+#gir5 {
+	height:100px !important;
+}
+#girl4, #girl7, #gir5 {
+	min-width: 100% !important;
+}
+#bgirl11 {
+	height: 131px !important;
+	-webkit-filter: grayscale(100%);
+}
+#girl8, #logo, #girl7, #girl4 {
+	height: 75px !important;
+}
+
+#logo p {
+	line-height: 75px;
+}
+
+@font-face {
+    font-family: 'custom';
+    src: url('fonts/Kingthings.ttf');
+}
+p {
+	font-family: custom;
+}
