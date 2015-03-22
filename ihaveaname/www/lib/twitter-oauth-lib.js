@@ -426,16 +426,13 @@
                                 oauth_nonce: $cordovaOauthUtility.createNonce(10),
                                 oauth_signature_method: "HMAC-SHA1",
                                 oauth_timestamp: Math.round((new Date()).getTime() / 1000.0),
-                                oauth_version: "1.1"
+                                oauth_version: "1.0"
                             };
                             var signatureObj = $cordovaOauthUtility.createSignature("POST", "https://api.twitter.com/oauth/request_token", oauthObject,  { oauth_callback: "http://localhost.com/callback" }, clientSecret);
-                            console.log('sig', signatureObj);
                             $http.defaults.headers.post.Authorization = signatureObj.authorization_header;
                             $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-                            console.log('slarti');
                             $http({method: "post", url: "https://api.twitter.com/oauth/request_token", data: "oauth_callback=http://localhost.com/callback" })
                                 .success(function(requestTokenResult) {
-                                  console.log('zaphod', requestTokenResult);
                                     var requestTokenParameters = (requestTokenResult).split("&");
                                     var parameterMap = {};
                                     for(var i = 0; i < requestTokenParameters.length; i++) {

@@ -11,10 +11,11 @@ angular.module('starter.controllers', [])
   tweet.getTweet();
   tweet.getTweet();
   $ionicPlatform.ready(function() {
-     $twitterOAuth.init('itfTbo4Uoq9pRKxu3dtYAgq9i', 'SSqoAzrcqtMeNoB54kRV0HdMzMHQBzXgBgsoiLtDoP7TkteLe6');
-     $twitterOAuth.connect().then(function(data) {
-       alert('yay');
-     });
+    $twitterOAuth.init('itfTbo4Uoq9pRKxu3dtYAgq9i', 'SSqoAzrcqtMeNoB54kRV0HdMzMHQBzXgBgsoiLtDoP7TkteLe6');
+    $twitterOAuth.connect().then(function(data) {
+      console.log('I am here, too', data);
+      alert('yay');
+    }, function(err) { console.log(err); });
   });
   // $ionicModal.fromTemplateUrl('templates/tweetout.html', {
   //   scope: $scope,
