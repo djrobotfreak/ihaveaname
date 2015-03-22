@@ -1,17 +1,24 @@
 angular.module('starter.controllers', [])
 
 .controller('tweetCtrl', function($scope, tweet, $ionicModal, $sce) {
+  $scope.tweets = [];
 	$scope.$on('tweetReady', function(blah, tweet) {
-	    $scope.tweet = tweet;
+	    $scope.tweets.push(tweet);
 	});
 	tweet.getTweet();
+  tweet.getTweet();
+  tweet.getTweet();
   // $ionicModal.fromTemplateUrl('templates/tweetout.html', {
   //   scope: $scope,
   //   animation: 'slide-in-up'
   // }).then(function(modal) {
   //   $scope.modal = modal;
   // });
-
+  $scope.skip = function(){
+    tweet.getTweet();
+    $scope.tweets.splice(0, 1);
+  }
+  
   $scope.openModal = function(){
     if (!$scope.modal){
       console.log('no modal');
@@ -34,21 +41,23 @@ angular.module('starter.controllers', [])
   };
   $scope.closeModal = function(outTweet) {
     console.log(outTweet);
+    tweet.getTweet();
+    $scope.tweets.splice(0, 1);
     $scope.modal.hide();
     $scope.modal.remove();
     delete $scope.modal;
   };
 })
-.controller('ChatsCtrl', function($scope, Chats) {
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  }
-})
+// .controller('ChatsCtrl', function($scope, Chats) {
+//   $scope.chats = Chats.all();
+//   $scope.remove = function(chat) {
+//     Chats.remove(chat);
+//   }
+// })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
+// .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
+//   $scope.chat = Chats.get($stateParams.chatId);
+// })
 
 .controller('shareCtrl', function($scope) {
   $scope.settings = {
