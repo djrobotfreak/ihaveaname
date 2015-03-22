@@ -1,6 +1,4 @@
 angular.module('starter.controllers', [])
-
-<<<<<<< HEAD
 .controller('tweetCtrl', function($scope, tweet, $ionicModal, $ionicPlatform, $twitterOAuth, $sce) {
   $scope.tweets = [];
 	$scope.$on('tweetReady', function(blah, tweet) {

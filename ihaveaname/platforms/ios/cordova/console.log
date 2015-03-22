@@ -52,3 +52,38 @@
 2015-03-21 22:19:32.666 ihaveaname[8116:338511] [CDVTimer][TotalPluginStartup] 0.271022ms
 2015-03-21 22:19:33.153 ihaveaname[8116:338511] Resetting plugins due to page load.
 2015-03-21 22:19:33.913 ihaveaname[8116:338511] Finished load of: file:///Users/Derek/Library/Developer/CoreSimulator/Devices/43C03A42-22CE-4B6D-A52F-2215D8A02165/data/Containers/Bundle/Application/E49754C8-1559-4022-8009-BDFA4EB617EF/ihaveaname.app/www/index.html
+2015-03-21 22:20:36.989 ihaveaname[8357:341974] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/Derek/Library/Developer/CoreSimulator/Devices/43C03A42-22CE-4B6D-A52F-2215D8A02165/data/Containers/Data/Application/00BCA6AF-77CE-49D8-ADC2-32AE3B0AFCA6/Library/Cookies/Cookies.binarycookies
+2015-03-21 22:20:37.076 ihaveaname[8357:341974] Apache Cordova native platform version 3.8.0 is starting.
+2015-03-21 22:20:37.077 ihaveaname[8357:341974] Multi-tasking -> Device: YES, App: YES
+2015-03-21 22:20:37.078 ihaveaname[8357:341974] Unlimited access to network resources
+2015-03-21 22:20:37.168 ihaveaname[8357:341974] [CDVTimer][keyboard] 0.068009ms
+2015-03-21 22:20:37.168 ihaveaname[8357:341974] [CDVTimer][TotalPluginStartup] 0.247002ms
+2015-03-21 22:20:37.298 ihaveaname[8357:341974] Resetting plugins due to page load.
+2015-03-21 22:20:37.473 ihaveaname[8357:341974] Finished load of: file:///Users/Derek/Library/Developer/CoreSimulator/Devices/43C03A42-22CE-4B6D-A52F-2215D8A02165/data/Containers/Bundle/Application/B97BC48F-839F-4B8D-AED0-FBFAD3C54D8E/ihaveaname.app/www/index.html
+2015-03-21 22:25:39.615 ihaveaname[8541:368386] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/Derek/Library/Developer/CoreSimulator/Devices/43C03A42-22CE-4B6D-A52F-2215D8A02165/data/Containers/Data/Application/0F9DC4FB-39C4-4DFF-B3D2-FDFEEBEE3F3B/Library/Cookies/Cookies.binarycookies
+2015-03-21 22:25:39.693 ihaveaname[8541:368386] Apache Cordova native platform version 3.8.0 is starting.
+2015-03-21 22:25:39.694 ihaveaname[8541:368386] Multi-tasking -> Device: YES, App: YES
+2015-03-21 22:25:39.695 ihaveaname[8541:368386] Unlimited access to network resources
+2015-03-21 22:25:39.772 ihaveaname[8541:368386] [CDVTimer][keyboard] 0.064015ms
+2015-03-21 22:25:39.772 ihaveaname[8541:368386] [CDVTimer][TotalPluginStartup] 0.220001ms
+2015-03-21 22:25:39.894 ihaveaname[8541:368386] Resetting plugins due to page load.
+2015-03-21 22:25:40.061 ihaveaname[8541:368386] Finished load of: file:///Users/Derek/Library/Developer/CoreSimulator/Devices/43C03A42-22CE-4B6D-A52F-2215D8A02165/data/Containers/Bundle/Application/CDBAC5A2-7715-4DA9-A71D-8B9539AB3A22/ihaveaname.app/www/index.html
+2015-03-21 22:30:48.355 ihaveaname[8937:381332] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/Derek/Library/Developer/CoreSimulator/Devices/43C03A42-22CE-4B6D-A52F-2215D8A02165/data/Containers/Data/Application/3B7EFFFD-A2BB-4B83-A786-2BB35545AC82/Library/Cookies/Cookies.binarycookies
+2015-03-21 22:30:48.548 ihaveaname[8937:381332] Apache Cordova native platform version 3.8.0 is starting.
+2015-03-21 22:30:48.548 ihaveaname[8937:381332] Multi-tasking -> Device: YES, App: YES
+2015-03-21 22:30:48.550 ihaveaname[8937:381332] Unlimited access to network resources
+2015-03-21 22:30:48.635 ihaveaname[8937:381332] [CDVTimer][keyboard] 0.061989ms
+2015-03-21 22:30:48.635 ihaveaname[8937:381332] [CDVTimer][TotalPluginStartup] 0.224948ms
+2015-03-21 22:30:48.789 ihaveaname[8937:381332] Resetting plugins due to page load.
+2015-03-21 22:30:48.977 ihaveaname[8937:381332] Finished load of: file:///Users/Derek/Library/Developer/CoreSimulator/Devices/43C03A42-22CE-4B6D-A52F-2215D8A02165/data/Containers/Bundle/Application/C4957416-5056-4355-ABA5-FAEFDB746D3E/ihaveaname.app/www/index.html
+2015-03-21 22:39:15.513 ihaveaname[9131:403582] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/Derek/Library/Developer/CoreSimulator/Devices/43C03A42-22CE-4B6D-A52F-2215D8A02165/data/Containers/Data/Application/CF55A5D3-57AC-42A6-A010-D9B0F575BEC8/Library/Cookies/Cookies.binarycookies
+2015-03-21 22:39:15.816 ihaveaname[9131:403582] Apache Cordova native platform version 3.8.0 is starting.
+2015-03-21 22:39:15.816 ihaveaname[9131:403582] Multi-tasking -> Device: YES, App: YES
+2015-03-21 22:39:15.838 ihaveaname[9131:403582] Unlimited access to network resources
+2015-03-21 22:39:15.933 ihaveaname[9131:403582] [CDVTimer][keyboard] 0.067055ms
+2015-03-21 22:39:15.933 ihaveaname[9131:403582] [CDVTimer][TotalPluginStartup] 0.266016ms
+2015-03-21 22:39:16.059 ihaveaname[9131:403582] Resetting plugins due to page load.
+2015-03-21 22:39:16.348 ihaveaname[9131:403582] Finished load of: file:///Users/Derek/Library/Developer/CoreSimulator/Devices/43C03A42-22CE-4B6D-A52F-2215D8A02165/data/Containers/Bundle/Application/14BD4400-3408-4BEC-BCF1-03529C59A1BD/ihaveaname.app/www/index.html#/tab/tweet
+2015-03-21 22:39:16.995 ihaveaname[9131:403582] new cookie 579469215393927168
+2015-03-21 22:39:16.995 ihaveaname[9131:403582] new cookie 579469215393927168
+2015-03-21 22:39:16.995 ihaveaname[9131:403582] new cookie 579469215393927168
