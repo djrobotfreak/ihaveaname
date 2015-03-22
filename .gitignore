@@ -4,3 +4,5 @@
 *.log
 
 ihaveaname/platforms/ios/cordova/console.log
+
+ihaveaname/platforms/ios/ihaveaname.xcodeproj/project.pbxproj

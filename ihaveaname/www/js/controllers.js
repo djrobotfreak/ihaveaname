@@ -10,13 +10,15 @@ angular.module('starter.controllers', [])
 	tweet.getTweet();
   tweet.getTweet();
   tweet.getTweet();
-  $ionicPlatform.ready(function() {
-    $twitterOAuth.init('itfTbo4Uoq9pRKxu3dtYAgq9i', 'SSqoAzrcqtMeNoB54kRV0HdMzMHQBzXgBgsoiLtDoP7TkteLe6');
-    $twitterOAuth.connect().then(function(data) {
-      console.log('I am here, too', data);
-      alert('yay');
-    }, function(err) { console.log(err); });
-  });
+  $scope.testOAuth = function(){
+    // $ionicPlatform.ready(function() {
+      $twitterOAuth.init('YyPIscWQb0Nzsb8Ih65Ry30og', 'wgly2AhXwetEawtISfu3AMTa228F01tzd1K0q6SxJfBEwDZpEE');
+      $twitterOAuth.connect().then(function(data) {
+        console.log('I am here, too', data);
+        alert('yay');
+      }, function(err) { console.log(err); });
+    // });
+  }
   // $ionicModal.fromTemplateUrl('templates/tweetout.html', {
   //   scope: $scope,
   //   animation: 'slide-in-up'
