@@ -23,3 +23,14 @@
 2015-03-21 16:01:53.715 ihaveaname[818:9149] Resetting plugins due to page load.
 2015-03-21 16:01:54.012 ihaveaname[818:9149] Finished load of: file:///Users/Derek/Library/Developer/CoreSimulator/Devices/43C03A42-22CE-4B6D-A52F-2215D8A02165/data/Containers/Bundle/Application/9782DC8F-F04F-4BE9-BEC7-369B9845C54D/ihaveaname.app/www/index.html#/tab/dash
 2015-03-21 16:01:55.024 ihaveaname[818:9149] zaphod [object Object]
+2015-03-21 19:32:39.267 ihaveaname[2249:82459] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/Derek/Library/Developer/CoreSimulator/Devices/43C03A42-22CE-4B6D-A52F-2215D8A02165/data/Containers/Data/Application/6BEA73E1-69B7-4941-B228-AC015DF02410/Library/Cookies/Cookies.binarycookies
+2015-03-21 19:32:39.557 ihaveaname[2249:82459] Apache Cordova native platform version 3.8.0 is starting.
+2015-03-21 19:32:39.558 ihaveaname[2249:82459] Multi-tasking -> Device: YES, App: YES
+2015-03-21 19:32:39.574 ihaveaname[2249:82459] Unlimited access to network resources
+2015-03-21 19:32:39.929 ihaveaname[2249:82459] [CDVTimer][keyboard] 0.066996ms
+2015-03-21 19:32:39.930 ihaveaname[2249:82459] [CDVTimer][TotalPluginStartup] 0.243962ms
+2015-03-21 19:32:40.267 ihaveaname[2249:82459] Resetting plugins due to page load.
+2015-03-21 19:32:40.566 ihaveaname[2249:82459] Finished load of: file:///Users/Derek/Library/Developer/CoreSimulator/Devices/43C03A42-22CE-4B6D-A52F-2215D8A02165/data/Containers/Bundle/Application/63369BB0-2CFF-48CC-8257-DD118750E9EC/ihaveaname.app/www/index.html#/tab/tweet
+2015-03-21 19:32:41.220 ihaveaname[2249:82459] zaphod [object Object]
+2015-03-21 19:32:43.358 ihaveaname[2249:82459] no modal
+2015-03-21 19:32:45.062 ihaveaname[2249:82459] Want to get dirty? #rpgo #ihaveavoice goo.gl/X6Nyi7
