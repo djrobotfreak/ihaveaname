@@ -1,5 +1,6 @@
 angular.module('starter.controllers', [])
 
+<<<<<<< HEAD
 .controller('tweetCtrl', function($scope, tweet, $ionicModal, $sce) {
 	$scope.$on('tweetReady', function(blah, tweet) {
 	    $scope.tweet = tweet;
@@ -11,6 +12,23 @@ angular.module('starter.controllers', [])
   // }).then(function(modal) {
   //   $scope.modal = modal;
   // });
+=======
+.controller('DashCtrl', function($scope, $ionicPlatform, tweet, $twitterOAuth) {
+	$scope.$on('tweetReady', function(scopeInfo, tweet) {
+	  $scope.tweet = tweet;
+	});
+	$scope.$on('retweetsReady', function(scopeInfo, replies) {
+	  $scope.replies = replies;
+	});
+  
+  $ionicPlatform.ready(function() {
+       $twitterOAuth.init('itfTbo4Uoq9pRKxu3dtYAgq9i', 'SSqoAzrcqtMeNoB54kRV0HdMzMHQBzXgBgsoiLtDoP7TkteLe6');
+       $twitterOAuth.connect().then(function(data) {
+         alert('yay');
+       });
+  });
+})
+>>>>>>> OAuth work.
 
   $scope.openModal = function(){
     if (!$scope.modal){
