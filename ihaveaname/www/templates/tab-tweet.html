@@ -1,10 +1,9 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
-    <div class="list card" ng-repeat="tweet in tweets | limitTo:1">
+    <div class="list card tweetItem" ng-repeat="tweet in tweets | limitTo:1">
       <div class="item item-body">
-        <div>
-          {{tweet.text}}
-        </div>
+        <span ng-bind-html="tweet.text | tweetLinky">
+        </span>
       </div>
       <div id="tweetactions" class="item item-divider">
         <button class="button button-block button-dark" ng-click="skip()">
@@ -17,7 +16,7 @@
     <div class="list card" ng-hide="tweets.length">
       <p style="text-align:center">No tweets to show!</p>
     </div>
-    <button ng-click="testOAuth()">Test</button>
+<!--     <button ng-click="testOAuth()">Test</button> -->
   </ion-content>
 
 </ion-view>

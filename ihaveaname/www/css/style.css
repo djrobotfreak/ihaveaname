@@ -1,4 +1,3 @@
-/* Empty. Add your own CSS if you like */
 #tweetactions{padding:0px;}
 #tweetactions button{width:50%; display:inline-block; margin:0px;}
 #sendtweet{margin:0px 10px;}
@@ -6,3 +5,18 @@
 .thash{font-weight:bold;}
 .tab-item{padding-top:5px;}
 .title{font-weight: bold;}
+
+.tweetItem.ng-leave {
+	position:absolute;
+	top:-20px;
+	-webkit-animation: fadeOutRightBig .5s;
+	-moz-animation: fadeOutRightBig .5s;
+	-ms-animation: fadeOutRightBig .5s;
+	animation: fadeOutRightBig .5s;
+}
+.tweetItem.ng-enter {
+	-webkit-animation: fadeInLeftBig .5s;
+	-moz-animation: fadeInLeftBig .5s;
+	-ms-animation: fadeInLeftBig .5s;
+	animation: fadeInLeftBig .5s;
+}

@@ -48,7 +48,7 @@ angular.module('starter.services', [])
 //     }
 //   };
 // })
-.factory('tweet', function ($http, $rootScope) {
+.factory('Tweet', function ($http, $rootScope) {
   // Public API here
   var cookie = '0';
   return {
@@ -132,4 +132,28 @@ angular.module('starter.services', [])
         getStoredToken: getStoredToken,
         createTwitterSignature: createTwitterSignature
     };
-});
+})
+.filter('tweetLinky',['$filter', '$sce',
+    function($filter, $sce) {
+        return function(text, target) {
+            if (!text) return text;
+            var replacedText = text;
+            // Turn urls blue
+            var httpReplace = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
+            replacedText = replacedText.replace(httpReplace, ' <span class="tlink">$1</span>');
+            //URLs starting with "www." (without // before it, or it'd re-link the ones done above).
+            var wwwReplace = /(^|[^\/])(www\.[\S]+(\b|$))/gim;
+            replacedText = replacedText.replace(wwwReplace, ' <span class="tlink">$2</span>');
+            // replace #hashtags
+            var hashReplace = /(^|\s)#(\w*[a-zA-Z_]+\w*)/gim;
+            replacedText = replacedText.replace(hashReplace, ' <span class="thash">#$2</span>');
+            // replace @mentions
+            var atReplace = /(^|\s)\@(\w*[a-zA-Z_]+\w*)/gim;
+            replacedText = replacedText.replace(atReplace, ' <span class="thash">@$2</span>');
+            return $sce.trustAsHtml(replacedText);
+        };
+    }
+]);
+
+
+
