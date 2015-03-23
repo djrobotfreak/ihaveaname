@@ -54,8 +54,6 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('shareCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
-})
+.controller('shareCtrl', function($scope){
+
+});

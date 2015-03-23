@@ -20,7 +20,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   });
 })
-
 .config(function($stateProvider, $urlRouterProvider) {
 
   // Ionic uses AngularUI Router which uses the concept of states
@@ -40,44 +39,31 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
   .state('tab.tweet', {
     url: '/tweet',
-    views: {
-      'tab-tweet': {
-        templateUrl: 'templates/tab-tweet.html',
-        controller: 'tweetCtrl'
+      views: {
+        'tab-tweet': {
+          templateUrl: 'templates/tab-tweet.html',
+          controller: 'tweetCtrl'
+        }
       }
-    }
   })
-
-  .state('tab.chats', {
-      url: '/chats',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
-        }
-      }
-    })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
-        }
-      }
-    })
-
   .state('tab.share', {
     url: '/share',
-    views: {
-      'tab-share': {
-        templateUrl: 'templates/tab-share.html',
-        controller: 'shareCtrl'
+      views: {
+        'tab-share': {
+          templateUrl: 'templates/tab-share.html',
+          controller: 'tweetCtrl'
+        }
       }
-    }
   });
+
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/tweet');
 
 });
+
+// $(document).ready(function () {
+//   $(body).on("click", "img", function () {
+//     console.log("test");
+//   });
+// });
