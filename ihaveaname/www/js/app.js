@@ -7,7 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngCordovaOauth'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $cordovaOauth) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -18,6 +18,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+    
+    $cordovaOauth.twitter(
+      TWITTER_AUTHENTICATION.clientId, 
+      TWITTER_AUTHENTICATION.clientSecret,
+      TWITTER_AUTHENTICATION.accessToken,
+      TWITTER_AUTHENTICATION.accessSecret
+    ).then(function(result) {
+       console.log('Authenticated');
+    }, function(error) {
+       console.log("Error -> " + error);
+    });
   });
 })
 .config(function($stateProvider, $urlRouterProvider) {
