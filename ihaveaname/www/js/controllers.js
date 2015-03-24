@@ -1,8 +1,8 @@
 angular.module('starter.controllers', [])
-.controller('tweetCtrl', function($scope, Tweet, $ionicModal, $ionicPlatform, $twitterOAuth, $sce, $timeout) {
+.controller('tweetCtrl', function($scope, Tweet, $ionicModal, $ionicPlatform, $cordovaOauth, $sce, $timeout) {
   $scope.tweets = [{text:'I am a test message #test @testing http://goo.gl/X6Nyi7'}, {text:'I am a test message #test @testing http://goo.gl/X6Nyi7'}, {text:'I am a test message #test @testing http://goo.gl/X6Nyi7'}, {text:'I am a test message #test @testing http://goo.gl/X6Nyi7'}];
   $scope.tweetlist = ['Whoa. #rpgo http://goo.gl/X6Nyi7', 'Real People Getting Oppressed #rpgo http://goo.gl/X6Nyi7', 'Is she worth it? http://goo.gl/X6Nyi7'];
-	$scope.$on('tweetReady', function(blah, new_tweet) {
+	$scope.$on('tweetReady', function(scopeInfo, new_tweet) {
     $scope.tweets.push(new_tweet);
     if ($scope.tweets.length < 3){
       Tweet.getTweet();
@@ -12,17 +12,20 @@ angular.module('starter.controllers', [])
   $scope.$on('retweetsReady', function(scopeInfo, replies) {
     $scope.replies = replies;
   });
+	Tweet.getTweet();  
+  $ionicPlatform.ready(function() {
+    $cordovaOauth.twitter(
+      TWITTER_AUTHENTICATION.clientId, 
+      TWITTER_AUTHENTICATION.clientSecret,
+      TWITTER_AUTHENTICATION.accessToken,
+      TWITTER_AUTHENTICATION.accessSecret
+    ).then(function(result) {
+       console.log('Authenticated');
+    }, function(error) {
+       console.log("Error -> " + error);
+    });
+  });
 
-	Tweet.getTweet();
-  $scope.testOAuth = function(){
-    // $ionicPlatform.ready(function() {
-      $twitterOAuth.init('YyPIscWQb0Nzsb8Ih65Ry30og', 'wgly2AhXwetEawtISfu3AMTa228F01tzd1K0q6SxJfBEwDZpEE');
-      $twitterOAuth.connect().then(function(data) {
-        console.log('I am here, too', data);
-        alert('yay');
-      }, function(err) { console.log(err); });
-    // });
-  }
   $scope.skip = function(){
     Tweet.getTweet();
     $scope.tweets.splice(0, 1);
@@ -41,7 +44,7 @@ angular.module('starter.controllers', [])
     else{
       $scope.modal.show();
     }
-  }
+  };
   $scope.closeModal = function(outTweet) {
     Tweet.getTweet();
     //wait for modal to close before removing element
@@ -53,7 +56,6 @@ angular.module('starter.controllers', [])
     delete $scope.modal;
   };
 })
-
 .controller('shareCtrl', function($scope){
 
 });
