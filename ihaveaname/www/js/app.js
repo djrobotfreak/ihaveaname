@@ -18,17 +18,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
-    
-    $cordovaOauth.twitter(
-      TWITTER_AUTHENTICATION.clientId, 
-      TWITTER_AUTHENTICATION.clientSecret,
-      TWITTER_AUTHENTICATION.accessToken,
-      TWITTER_AUTHENTICATION.accessSecret
-    ).then(function(result) {
-       console.log('Authenticated');
-    }, function(error) {
-       console.log("Error -> " + error);
-    });
   });
 })
 .config(function($stateProvider, $urlRouterProvider) {

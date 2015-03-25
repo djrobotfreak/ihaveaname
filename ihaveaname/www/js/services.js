@@ -2,12 +2,9 @@ angular.module('starter.services', [])
 .factory('Tweet', function ($http, $rootScope) {
   // Public API here
   return {
-    getTweet: function () {
-      var cookie = 0;
-      $http.get('http://192.168.13.23/trafik/api/twitter/gettaghistorybyid/' + cookie).
+    getTweet: function (lastId) {
+      $http.get('http://ihaveaname.gear.host/api/twitter/gettaghistorybyid/' + lastId).
           success(function(data, status, headers, config) {
-              console.log('zaphod', data);
-              cookie = data.id;
               $rootScope.$broadcast('tweetReady', data);
           }).
           error(function(data, status, headers, config) {
@@ -15,7 +12,7 @@ angular.module('starter.services', [])
           });
         },
     getRetweets: function() {
-      $http.get('http://192.168.13.23/trafik/api/twitter/getretweetlist/').
+      $http.get('http://ihaveaname.gear.host/trafik/api/twitter/getretweetlist/').
           success(function(data, status, headers, config) {
               $rootScope.$broadcast('retweetsReady', data);
           }).
@@ -26,13 +23,9 @@ angular.module('starter.services', [])
       };
   })
 
-.factory('TwitterService', function($cordovaOauth, $cordovaOauthUtility, $http, $resource, $q) {
-    // 1
+.factory('TwitterService', function($cordovaOauth, $http, $q) {
     var twitterKey = "STORAGE.TWITTER.KEY";
-    var clientId = 'itfTbo4Uoq9pRKxu3dtYAgq9i';
-    var clientSecret = 'SSqoAzrcqtMeNoB54kRV0HdMzMHQBzXgBgsoiLtDoP7TkteLe6';
 
-    // 2
     function storeUserToken(data) {
         window.localStorage.setItem(twitterKey, JSON.stringify(data));
     }
@@ -41,22 +34,7 @@ angular.module('starter.services', [])
         return window.localStorage.getItem(twitterKey);
     }
 
-    // 3
-    function createTwitterSignature(method, url) {
-        var token = angular.fromJson(getStoredToken());
-        var oauthObject = {
-            oauth_consumer_key: clientId,
-            oauth_nonce: $cordovaOauthUtility.createNonce(10),
-            oauth_signature_method: "HMAC-SHA1",
-            oauth_token: token.oauth_token,
-            oauth_timestamp: Math.round((new Date()).getTime() / 1000.0),
-            oauth_version: "1.0"
-        };
-        var signatureObj = $cordovaOauthUtility.createSignature(method, url, oauthObject, {}, clientSecret, token.oauth_token_secret);
-        $http.defaults.headers.common.Authorization = signatureObj.authorization_header;
-    }
     return {
-        // 4
         initialize: function() {
             var deferred = $q.defer();
             var token = getStoredToken();
@@ -64,24 +42,25 @@ angular.module('starter.services', [])
             if (token !== null) {
                 deferred.resolve(true);
             } else {
-                console.log('slarti', clientId, clientSecret);
-                $cordovaOauth.twitter(clientId, clientSecret).then(function(result) {
-                  
-                    storeUserToken(result);
-                    deferred.resolve(true);
-                }, function(error) {
-                    deferred.reject(false);
-                });
+              $cordovaOauth.twitter(
+                TWITTER_AUTHENTICATION.clientId, 
+                TWITTER_AUTHENTICATION.clientSecret,
+                TWITTER_AUTHENTICATION.accessToken,
+                TWITTER_AUTHENTICATION.accessSecret
+              ).then(function(result) {
+                  storeUserToken(result);
+                  deferred.resolve(true);
+              }, function(error) {
+                  deferred.reject(false);
+              });
             }
             return deferred.promise;
         },
-        // 5
         isAuthenticated: function() {
             return getStoredToken() !== null;
         },
         storeUserToken: storeUserToken,
-        getStoredToken: getStoredToken,
-        createTwitterSignature: createTwitterSignature
+        getStoredToken: getStoredToken
     };
 })
 

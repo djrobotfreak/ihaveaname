@@ -2,7 +2,7 @@
   <ion-content class="padding">
     <div class="list card tweetItem" ng-repeat="tweet in tweets | limitTo:1">
       <div class="item item-body">
-        <span ng-bind-html="tweet.text | tweetLinky">
+        <span ng-bind-html="tweet.Text | tweetLinky">
         </span>
       </div>
       <div id="tweetactions" class="item item-divider">
