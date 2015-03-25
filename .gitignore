@@ -6,3 +6,9 @@
 ihaveaname/platforms/ios/cordova/console.log
 
 ihaveaname/platforms/ios/ihaveaname.xcodeproj/project.pbxproj
+
+ihaveaname/www/js/config.js
+
+ihaveaname/www/lib/angular
+
+ihaveaname/www/lib/ng-cordova-oauth
