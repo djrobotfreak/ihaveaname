@@ -27,11 +27,16 @@ angular.module('starter.services', [])
     var twitterKey = "STORAGE.TWITTER.KEY";
 
     function storeUserToken(data) {
+      if (data == null) {
+        window.localStorage.removeItem(twitterKey);
+      } else {
         window.localStorage.setItem(twitterKey, JSON.stringify(data));
+      }
     }
 
     function getStoredToken() {
-        return window.localStorage.getItem(twitterKey);
+        var token = window.localStorage.getItem(twitterKey);
+        return token && JSON.parse(token);
     }
 
     return {
@@ -51,6 +56,7 @@ angular.module('starter.services', [])
                   storeUserToken(result);
                   deferred.resolve(true);
               }, function(error) {
+                  console.error('error', error);
                   deferred.reject(false);
               });
             }
@@ -61,7 +67,7 @@ angular.module('starter.services', [])
         },
         postTweet: function(tweetText) {
             var tweetURL = 'https://api.twitter.com/1.1/statuses/update.json';
-            var token = angular.fromJson(getStoredToken());
+            var token = getStoredToken();
             var oauthObject = {
                 oauth_consumer_key: TWITTER_AUTHENTICATION.clientId,
                 oauth_nonce: $cordovaOauthUtility.createNonce(32),
@@ -69,12 +75,13 @@ angular.module('starter.services', [])
                 oauth_timestamp: Math.round((new Date()).getTime() / 1000.0),
                 oauth_token: token.oauth_token,
                 oauth_version: "1.0",
-                status: tweetText
+                status: tweetText,
+                'trim_user': 'true'
             };
             var signatureObj = $cordovaOauthUtility.createSignature('POST', tweetURL, oauthObject, oauthObject, TWITTER_AUTHENTICATION.clientSecret, token.oauth_token_secret);
             $http.defaults.headers.common.Authorization = signatureObj.authorization_header;
 
-            return $resource(tweetURL, {'status': tweetText}).save().$promise;
+            return $resource(tweetURL, {'status': tweetText, 'trim_user': 'true'}).save().$promise;
         },
         storeUserToken: storeUserToken,
         getStoredToken: getStoredToken

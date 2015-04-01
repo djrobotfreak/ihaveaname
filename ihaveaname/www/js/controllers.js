@@ -3,9 +3,9 @@ angular.module('starter.controllers', [])
   TwitterService.initialize().then(function() {
     $scope.tweets = [];
     $scope.tweetlist = [
-      'You know what it is. #rpgo http://goo.gl/X6Nyi7', 
-      'Real People Getting Oppressed #rpgo http://goo.gl/X6Nyi7', 
-      'She is worth it. #rpgo http://goo.gl/X6Nyi7'
+      'You know what it is. #rpgo tinyurl.com/qx8jero', 
+      'Real People Getting Oppressed #rpgo tinyurl.com/qx8jero', 
+      'She is worth it. #rpgo tinyurl.com/qx8jero'
     ];
   	$scope.$on('tweetReady', function(scopeInfo, new_tweet) {
       $scope.tweets.push(new_tweet);
@@ -42,8 +42,18 @@ angular.module('starter.controllers', [])
     };
     $scope.closeModal = function(outTweet) {
       TwitterService.postTweet(outTweet).then(function () {
-        //wait for modal to close before removing element
-        $timeout(function(){
+        console.log('Successfully tweeted response');
+      }).catch(function (err) {
+        if (err.status === 401) {
+          TwitterService.storeUserToken(null);
+          TwitterService.initialize().then(function() {
+            TwitterService.postTweet(outTweet);
+          });
+        } else {
+          console.error('Failed to tweet response', err);
+        }
+      }).finally(function () {        //wait for modal to close before removing element
+        $timeout(function() {
          $scope.skip();
         }, 400);
         $scope.modal.hide();
