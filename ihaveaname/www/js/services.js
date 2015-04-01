@@ -23,7 +23,7 @@ angular.module('starter.services', [])
       };
   })
 
-.factory('TwitterService', function($cordovaOauth, $http, $q) {
+.factory('TwitterService', function($cordovaOauth, $cordovaOauthUtility, $http, $resource, $q) {
     var twitterKey = "STORAGE.TWITTER.KEY";
 
     function storeUserToken(data) {
@@ -58,6 +58,23 @@ angular.module('starter.services', [])
         },
         isAuthenticated: function() {
             return getStoredToken() !== null;
+        },
+        postTweet: function(tweetText) {
+            var tweetURL = 'https://api.twitter.com/1.1/statuses/update.json';
+            var token = angular.fromJson(getStoredToken());
+            var oauthObject = {
+                oauth_consumer_key: TWITTER_AUTHENTICATION.clientId,
+                oauth_nonce: $cordovaOauthUtility.createNonce(32),
+                oauth_signature_method: "HMAC-SHA1",
+                oauth_timestamp: Math.round((new Date()).getTime() / 1000.0),
+                oauth_token: token.oauth_token,
+                oauth_version: "1.0",
+                status: tweetText
+            };
+            var signatureObj = $cordovaOauthUtility.createSignature('POST', tweetURL, oauthObject, oauthObject, TWITTER_AUTHENTICATION.clientSecret, token.oauth_token_secret);
+            $http.defaults.headers.common.Authorization = signatureObj.authorization_header;
+
+            return $resource(tweetURL, {'status': tweetText}).save().$promise;
         },
         storeUserToken: storeUserToken,
         getStoredToken: getStoredToken

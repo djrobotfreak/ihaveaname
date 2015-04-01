@@ -41,13 +41,15 @@ angular.module('starter.controllers', [])
       }
     };
     $scope.closeModal = function(outTweet) {
-      //wait for modal to close before removing element
-      $timeout(function(){
-        $scope.skip();
-      }, 400);
-      $scope.modal.hide();
-      $scope.modal.remove();
-      delete $scope.modal;
+      TwitterService.postTweet(outTweet).then(function () {
+        //wait for modal to close before removing element
+        $timeout(function(){
+         $scope.skip();
+        }, 400);
+        $scope.modal.hide();
+        $scope.modal.remove();
+        delete $scope.modal;
+      });
     };
   });
 })
