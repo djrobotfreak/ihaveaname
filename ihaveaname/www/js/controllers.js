@@ -1,3 +1,18 @@
+function appendHashTags(_inTweet, _outTweet, _hashtags){
+  console.log("appendHashTags: inputs: ",_inTweet, _outTweet, _hashtags)
+  var inTweet = _inTweet.toLowerCase();
+  var outTweetLower = _outTweet.toLowerCase();
+  var returnTweet = _outTweet.trim();
+  for (var i = 0; i < _hashtags.length; i++){
+    if(inTweet.indexOf(_hashtags[i]) != -1 && outTweetLower.indexOf(_hashtags[i]) == -1){
+      if ((returnTweet.length + _hashtags[i].length + 1) <=140){
+        returnTweet += " " + _hashtags[i];
+      }
+    }
+  }
+  return returnTweet;
+}
+
 angular.module('starter.controllers', [])
 .controller('tweetCtrl', function($scope, Tweet, TwitterService, $ionicModal, $ionicPlatform, $sce, $timeout) {
   TwitterService.initialize().then(function() {
@@ -40,7 +55,9 @@ angular.module('starter.controllers', [])
         $scope.modal.show();
       }
     };
-    $scope.closeModal = function(outTweet) {
+    $scope.closeModal = function(outTweet){
+      outTweet = appendHashTags($scope.tweets[0].Text, outTweet, Tweet.getHashTagList());
+      console.log("Sending Tweet: ", outTweet);
       TwitterService.postTweet(outTweet).then(function () {
         console.log('Successfully tweeted response');
       }).catch(function (err) {

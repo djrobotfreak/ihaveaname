@@ -1,6 +1,7 @@
 angular.module('starter.services', [])
 .factory('Tweet', function ($http, $rootScope) {
   // Public API here
+  var hashTagList = ["#rpgo", "#rhgo", "#pimp", "#downforthecrown", "#pgo", "#hgo"];
   return {
     getTweet: function (lastId) {
       $http.get('http://ihaveaname.gear.host/api/twitter/gettaghistorybyid/' + lastId).
@@ -10,7 +11,7 @@ angular.module('starter.services', [])
           error(function(data, status, headers, config) {
               $rootScope.$broadcast('tweetError');
           });
-        },
+    },
     getRetweets: function() {
       $http.get('http://ihaveaname.gear.host/trafik/api/twitter/getretweetlist/').
           success(function(data, status, headers, config) {
@@ -19,9 +20,15 @@ angular.module('starter.services', [])
           error(function(data, status, headers, config) {
               $rootScope.$broadcast('retweetsError');
           });
-        }   
-      };
-  })
+    },
+    getHashTagList: function(){
+      return hashTagList;
+    },
+    loadHashTagList: function(){
+          //load and set hashTagList here;
+    }   
+  };
+})
 
 .factory('TwitterService', function($cordovaOauth, $cordovaOauthUtility, $http, $resource, $q) {
     var twitterKey = "STORAGE.TWITTER.KEY";
@@ -93,6 +100,8 @@ angular.module('starter.services', [])
         return function(text, target) {
             if (!text) return text;
             var replacedText = text;
+            var tinyReplace = new RegExp("(http://(bit\.ly|t\.co|lnkd\.in|tcrn\.ch)\S*)\b");
+            replacedText = replacedText.replace(httpReplace, ' <span class="tlink">$1</span>');
             // Turn urls blue
             var httpReplace = /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim;
             replacedText = replacedText.replace(httpReplace, ' <span class="tlink">$1</span>');
