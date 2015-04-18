@@ -20,3 +20,25 @@
 	-ms-animation: fadeInLeftBig .5s;
 	animation: fadeInLeftBig .5s;
 }
+.tweetItem {
+	padding: 0;
+}
+#rotating-image {
+	position: relative;
+}
+#rotating-image img {
+	width: 100%;
+	z-index: 1;
+}
+#image-fact p {
+	text-align: center;
+	color: white;
+	font-weight: bold;
+	font-size: 1.5em;
+	margin: 0 15% 0 15%;
+	position: absolute;
+	top:50%;
+	transform: translate(0, -50%);
+	background-color: black;
+	opacity: .5;
+}

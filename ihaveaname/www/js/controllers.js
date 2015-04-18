@@ -16,16 +16,27 @@ function appendHashTags(_inTweet, _outTweet, _hashtags){
 angular.module('starter.controllers', [])
 .controller('tweetCtrl', function($scope, Tweet, TwitterService, $ionicModal, $ionicPlatform, $sce, $timeout) {
   TwitterService.initialize().then(function() {
+    $scope.images = 
+      [
+        {path:'img/sad-stockphoto2.jpg', fact: "The average age of a young woman being trafficked is 12–14 years old."},
+        {path:'img/feet_in_chains_199358.jpg', fact: 'There are approximately 20 to 30 million slaves in the world today.'},
+        {path:'img/money-95793.jpg', fact: 'Human trafficking generates $9.5 billion yearly in the United States.'}
+      ];
+
     $scope.tweets = [];
     $scope.tweetlist = [
       'You know what it is. #rpgo tinyurl.com/qx8jero', 
       'Real People Getting Oppressed #rpgo tinyurl.com/qx8jero', 
       'She is worth it. #rpgo tinyurl.com/qx8jero'
     ];
-  	$scope.$on('tweetReady', function(scopeInfo, new_tweet) {
-      $scope.tweets.push(new_tweet);
+  	$scope.$on('tweetReady', function(scopeInfo, newTweet) {
+      if (!newTweet.image) {
+        var image = $scope.images[Math.floor(Math.random() * $scope.images.length)];
+        newTweet.image = image;
+      }
+      $scope.tweets.push(newTweet);
       if ($scope.tweets.length < 3){
-        Tweet.getTweet(new_tweet.Id);
+        Tweet.getTweet(newTweet.Id);
       }
   	});
 

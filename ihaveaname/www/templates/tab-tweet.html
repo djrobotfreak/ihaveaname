@@ -1,6 +1,10 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
     <div class="list card tweetItem" ng-repeat="tweet in tweets | limitTo:1">
+      <div id="rotating-image">
+        <img src="{{tweet.image.path}}"></img>
+        <div id="image-fact"><p>{{tweet.image.fact}}</p></div>
+      </div>
       <div class="item item-body">
         <span ng-bind-html="tweet.Text | tweetLinky">
         </span>
@@ -9,7 +13,7 @@
         <button class="button button-block button-dark" ng-click="skip()">
           Skip
         </button><button class="button button-block button-positive" ng-click="openModal()">
-          Bomb
+          Respond
         </button>
       </div>
     </div>
