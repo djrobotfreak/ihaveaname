@@ -1,34 +1,140 @@
 angular.module('starter.services', [])
-.factory('Tweet', function ($http, $rootScope) {
-  // Public API here
-  var hashTagList = ["#rpgo", "#rhgo", "#pimp", "#downforthecrown", "#pgo", "#hgo"];
-  return {
-    getTweet: function (lastId) {
-      $http.get('http://ihaveaname.gear.host/api/twitter/gettaghistorybyid/' + lastId).
+// .factory('Tweet_Old', function ($http, $rootScope) {
+//   // Public API here
+//   var hashTagList = ["#rpgo", "#rhgo", "#pimp", "#downforthecrown", "#pgo", "#hgo"];
+//   return {
+//     getTweet: function (lastId) {
+//       $http.get('http://ihaveaname.gear.host/api/twitter/gettaghistorybyid/' + lastId).
+//           success(function(data, status, headers, config) {
+//               $rootScope.$broadcast('tweetReady', data);
+//           }).
+//           error(function(data, status, headers, config) {
+//               $rootScope.$broadcast('tweetError');
+//           });
+//     },
+//     getRetweets: function() {
+//       $http.get('http://ihaveaname.gear.host/trafik/api/twitter/getretweetlist/').
+//           success(function(data, status, headers, config) {
+//               $rootScope.$broadcast('retweetsReady', data);
+//           }).
+//           error(function(data, status, headers, config) {
+//               $rootScope.$broadcast('retweetsError');
+//           });
+//     },
+//     getHashTagList: function(){
+//       return hashTagList;
+//     },
+//     loadHashTagList: function(){
+//           //load and set hashTagList here;
+//     }   
+//   };
+// })
+
+
+.factory('Tweet', ['$rootScope', '$http', '$q', function ($rootScope,$http, $q) {
+    var hashTagList = ["#rpgo", "#rhgo", "#pimp", "#downforthecrown", "#pgo", "#hgo"];
+    var serviceBase = 'http://trafikapi.gear.host/';
+    return{
+      getTweet: function (lastId) {
+        $http.get(serviceBase + 'api/Twitter/GetTagHistoryById/' + lastId).
           success(function(data, status, headers, config) {
-              $rootScope.$broadcast('tweetReady', data);
+            var new_tweet = data[0];
+            new_tweet.image = data.image;
+              $rootScope.$broadcast('tweetReady', new_tweet);
           }).
           error(function(data, status, headers, config) {
               $rootScope.$broadcast('tweetError');
           });
-    },
-    getRetweets: function() {
-      $http.get('http://ihaveaname.gear.host/trafik/api/twitter/getretweetlist/').
-          success(function(data, status, headers, config) {
-              $rootScope.$broadcast('retweetsReady', data);
-          }).
-          error(function(data, status, headers, config) {
-              $rootScope.$broadcast('retweetsError');
-          });
-    },
-    getHashTagList: function(){
-      return hashTagList;
-    },
-    loadHashTagList: function(){
-          //load and set hashTagList here;
-    }   
-  };
-})
+      },
+      getRetweets: function() {
+        $http.get(serviceBase + 'api/Twitter/getRetweetList/').
+            success(function(data, status, headers, config) {
+                $rootScope.$broadcast('retweetsReady', data);
+            }).
+            error(function(data, status, headers, config) {
+                $rootScope.$broadcast('retweetsError');
+            });
+      },
+      getHashTagList: function(){
+        return hashTagList;
+      },
+    }
+
+    // var _hello = function () {
+    //     return "Hello ";
+    // };
+
+    // var _runApi = function (apiTest) {
+    //     return $http.get(serviceBase + apiTest).then(function (results) {
+    //          // return results;
+    //          console.log("results", results);
+    //          return results;
+    //     },
+    //     function (httpError) {
+    //         throw httpError;
+    //     });
+    // };
+
+    // var _getTweet = function (lastId) {
+    //     //alert(serviceBase + apiTest);
+    //     return $http.get(serviceBase + 'api/Twitter/GetTagHistoryById/'+lastId).then(function (results) {
+    //         // var data = JSON.stringify(results);
+    //         var obj = JSON.parse(data);
+    //         //alert(obj.data[0].id);
+    //         $rootScope.$broadcast('tweetReady', obj);
+    //         return results;
+    //     },
+    //     function (httpError) {
+    //         throw httpError;
+    //     });
+    // };
+
+    // apitestsServiceFactory.GetNextTweet = _getTweet;
+    // apitestsServiceFactory.RunApi = _runApi;
+    // apitestsServiceFactory.Hello = _hello;
+
+    // return apitestsServiceFactory;
+}])
+
+
+
+.factory('authInterceptorService',['$rootScope', '$q', '$window', '$location' ,function ($rootScope, $q, $window, $location) {
+    return {
+        request: function (config) {
+            config.headers = config.headers || {};
+            if ($window.sessionStorage.token) {
+                config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+            }
+
+            if (config.method == 'GET') {
+                var separator = config.url.indexOf('?') === -1 ? '?' : '&';
+                config.url = config.url + separator + 'noCache=' + new Date().getTime();
+            }
+
+            return config;
+        },
+        responseError: function (response) {
+            if (response.status === 401) {
+                console.log("401 error", response);
+            }
+            return $q.reject(response);
+        }
+    };
+}])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .factory('TwitterService', function($cordovaOauth, $cordovaOauthUtility, $http, $resource, $q) {
     var twitterKey = "STORAGE.TWITTER.KEY";

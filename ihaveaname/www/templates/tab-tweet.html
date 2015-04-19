@@ -2,11 +2,11 @@
   <ion-content class="padding">
     <div class="list card tweetItem" ng-repeat="tweet in tweets | limitTo:1">
       <div id="rotating-image">
-        <img src="{{tweet.image.path}}"></img>
+        <img ng-src="{{tweet.image.path}}"></img>
         <div id="image-fact"><p>{{tweet.image.fact}}</p></div>
       </div>
       <div class="item item-body">
-        <span ng-bind-html="tweet.Text | tweetLinky">
+        <span ng-bind-html="tweet.text | tweetLinky">
         </span>
       </div>
       <div id="tweetactions" class="item item-divider">

@@ -16,6 +16,10 @@ function appendHashTags(_inTweet, _outTweet, _hashtags){
 angular.module('starter.controllers', [])
 .controller('tweetCtrl', function($scope, Tweet, TwitterService, $ionicModal, $ionicPlatform, $sce, $timeout) {
   TwitterService.initialize().then(function() {
+    Tweet.getRetweets();
+    $scope.$on('retweetsReady', function(scopeInfo, data){
+      console.log("retweet data", data);
+    });
     $scope.images = 
       [
         {path:'img/sad-stockphoto2.jpg', fact: "The average age of a young woman being trafficked is 12–14 years old."},
@@ -34,9 +38,10 @@ angular.module('starter.controllers', [])
         var image = $scope.images[Math.floor(Math.random() * $scope.images.length)];
         newTweet.image = image;
       }
+      console.log('new tweet', newTweet);
       $scope.tweets.push(newTweet);
       if ($scope.tweets.length < 3){
-        Tweet.getTweet(newTweet.Id);
+        Tweet.getTweet(newTweet.id);
       }
   	});
 
@@ -46,10 +51,16 @@ angular.module('starter.controllers', [])
   	Tweet.getTweet(window.localStorage.getItem('lastId') || '0');  
 
     $scope.skip = function() {
-      var lastId = $scope.tweets[0].Id;
-      window.localStorage.setItem('lastId', lastId);
-      Tweet.getTweet($scope.tweets[$scope.tweets.length - 1].Id);
+      var lastId = $scope.tweets[0].id;
+      if (lastId){
+        window.localStorage.setItem('lastId', lastId);
+      }
+      Tweet.getTweet($scope.tweets[$scope.tweets.length - 1].id);
       $scope.tweets.splice(0, 1);
+      if ($scope.modal){
+        $scope.modal.remove();
+        delete $scope.modal;
+      }
     };
 
     $scope.openModal = function(){
@@ -67,27 +78,33 @@ angular.module('starter.controllers', [])
       }
     };
     $scope.closeModal = function(outTweet){
-      outTweet = appendHashTags($scope.tweets[0].Text, outTweet, Tweet.getHashTagList());
-      console.log("Sending Tweet: ", outTweet);
-      TwitterService.postTweet(outTweet).then(function () {
-        console.log('Successfully tweeted response');
-      }).catch(function (err) {
-        if (err.status === 401) {
-          TwitterService.storeUserToken(null);
-          TwitterService.initialize().then(function() {
-            TwitterService.postTweet(outTweet);
+      if (outTweet){
+        outTweet = appendHashTags($scope.tweets[0].text, outTweet, Tweet.getHashTagList());
+        console.log("Sending Tweet: ", outTweet);
+        TwitterService.postTweet(outTweet).then(function () {
+          console.log('Successfully tweeted response');
+        }).catch(function (err) {
+          if (err.status === 401) {
+            TwitterService.storeUserToken(null);
+            TwitterService.initialize().then(function() {
+              TwitterService.postTweet(outTweet);
+            });
+          } else {
+            console.error('Failed to tweet response', err);
+          }
+        }).finally(function () {        //wait for modal to close before removing element
+          $scope.modal.hide().then(function(){
+            $scope.modal.remove();
+            delete $scope.modal;
+            $timeout(function() {
+              $scope.skip();
+            }, 100);
           });
-        } else {
-          console.error('Failed to tweet response', err);
-        }
-      }).finally(function () {        //wait for modal to close before removing element
-        $timeout(function() {
-         $scope.skip();
-        }, 400);
+        });
+      }
+      else{
         $scope.modal.hide();
-        $scope.modal.remove();
-        delete $scope.modal;
-      });
+      }
     };
   });
 })
