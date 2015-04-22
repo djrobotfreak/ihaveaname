@@ -31,9 +31,13 @@ angular.module('starter.services', [])
 // })
 
 
-.factory('Tweet', ['$rootScope', '$http', '$q', function ($rootScope,$http, $q) {
-    var hashTagList = ["#rpgo", "#rhgo", "#pimp", "#downforthecrown", "#pgo", "#hgo"];
-    var serviceBase = 'http://trafikapi.gear.host/';
+.factory('Tweet', ['$rootScope', '$http', '$q', '$window', function ($rootScope,$http, $q, $window) {
+    var serviceBase = TWEET_AUTHENTICATION.apiServiceBaseUri;
+    var _initialzation = {
+        accessToken: "",
+        isInitialized: false,
+        userName: ""
+    };
     return{
       getTweet: function (lastId) {
         $http.get(serviceBase + 'api/Twitter/GetTagHistoryById/' + lastId).
@@ -55,9 +59,23 @@ angular.module('starter.services', [])
                 $rootScope.$broadcast('retweetsError');
             });
       },
-      getHashTagList: function(){
-        return hashTagList;
-      },
+      init: function(){
+        console.log('Initializing...');
+        //alert(loginData.userName + ' : ' + loginData.password);
+        var data = "grant_type=password&client_id=" + TWEET_AUTHENTICATION.clientId + "&client_secret=" + TWEET_AUTHENTICATION.clientSecret;
+        var deferred = $q.defer();
+        $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
+            _initialzation.accessToken = response.access_token;
+            _initialzation.isInitialized = true;
+            $window.sessionStorage.token = response.access_token;
+            $window.sessionStorage.session = response.session_key;
+            console.log('getting new token', response.access_token);
+            deferred.resolve(response);
+        }).error(function (err, status) {
+            deferred.reject(err);
+        });
+        return deferred.promise;
+      }
     }
 
     // var _hello = function () {
@@ -98,12 +116,51 @@ angular.module('starter.services', [])
 
 
 
-.factory('authInterceptorService',['$rootScope', '$q', '$window', '$location' ,function ($rootScope, $q, $window, $location) {
+
+// .factory('initService', ['$http', '$q', '$rootScope','$window', function ($http, $q, $rootScope, $window) {
+
+//     var serviceBase = TWEET_AUTHENTICATION.apiServiceBaseUri;
+//     var initServiceFactory = {};
+
+//     var _initialzation = {
+//         accessToken: "",
+//         isInitialized: false,
+//         userName: ""
+//     };
+
+//     var _init = function () {
+//         console.log('Initializing...');
+//         //alert(loginData.userName + ' : ' + loginData.password);
+//         var data = "grant_type=password&client_id=" + TWEET_AUTHENTICATION.clientId + "&client_secret=" + TWEET_AUTHENTICATION.clientSecret;
+//         var deferred = $q.defer();
+//         $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
+//             _initialzation.accessToken = response.access_token;
+//             _initialzation.isInitialized = true;
+//             $window.sessionStorage.token = response.access_token;
+//             $window.sessionStorage.session = response.session_key;
+//             alert(response.session_key);
+//             deferred.resolve(response);
+//         }).error(function (err, status) {
+//             deferred.reject(err);
+//         });
+//         return deferred.promise;
+//     };
+ 
+//     initServiceFactory.Initialization = _initialzation;
+//     initServiceFactory.Init = _init;
+
+//     return initServiceFactory;
+// }])
+
+
+
+.factory('authInterceptorService',['$rootScope', '$q', '$window', '$location', function ($rootScope, $q, $window, $location) {
     return {
         request: function (config) {
             config.headers = config.headers || {};
             if ($window.sessionStorage.token) {
                 config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+                config.headers['session_key'] = $window.sessionStorage.session;
             }
 
             if (config.method == 'GET') {
@@ -116,23 +173,12 @@ angular.module('starter.services', [])
         responseError: function (response) {
             if (response.status === 401) {
                 console.log("401 error", response);
+                $rootScope.$broadcast('reinitialize');
             }
             return $q.reject(response);
         }
     };
 }])
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
