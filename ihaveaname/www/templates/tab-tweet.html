@@ -1,25 +1,28 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
-    <div class="list card tweetItem" ng-repeat="tweet in tweets | limitTo:1">
-      <div id="rotating-image">
-        <img ng-src="{{tweet.image.path}}"></img>
-        <div id="image-fact"><p>{{tweet.image.fact}}</p></div>
+    <div ng-hide="loading">
+      <div class="list card tweetItem" ng-repeat="tweet in tweets | limitTo:1">
+        <div id="rotating-image">
+          <img ng-src="{{tweet.image.path}}">
+          <div id="image-fact"><p>{{tweet.image.fact}}</p></div>
+        </div>
+        <div class="item item-body">
+          <span ng-bind-html="tweet.text | tweetLinky">
+          </span>
+        </div>
+        <div id="tweetactions" class="item item-divider">
+          <button class="button button-block button-dark" ng-click="skip()">
+            Skip
+          </button><button class="button button-block button-positive" ng-click="openModal()">
+            Respond
+          </button>
+        </div>
       </div>
-      <div class="item item-body">
-        <span ng-bind-html="tweet.text | tweetLinky">
-        </span>
-      </div>
-      <div id="tweetactions" class="item item-divider">
-        <button class="button button-block button-dark" ng-click="skip()">
-          Skip
-        </button><button class="button button-block button-positive" ng-click="openModal()">
-          Respond
-        </button>
+      <div class="list card" ng-hide="tweets.length">
+        <p style="text-align:center">No tweets to show!</p>
       </div>
     </div>
-    <div class="list card" ng-hide="tweets.length">
-      <p style="text-align:center">No tweets to show!</p>
-    </div>
+    <ion-spinner ng-show="loading" class="spinner" icon="ripple"></ion-spinner>
 <!--     <button ng-click="testOAuth()">Test</button> -->
   </ion-content>
 

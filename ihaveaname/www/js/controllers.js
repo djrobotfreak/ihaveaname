@@ -1,5 +1,4 @@
 function appendHashTags(_inTweet, _outTweet){
-  console.log("appendHashTags: inputs: ",_inTweet, _outTweetText)
   var inTweet = _inTweet.text.toLowerCase();
   var outTweetLower = _outTweet.toLowerCase();
   var returnTweet = _outTweet.trim();
@@ -14,21 +13,17 @@ function appendHashTags(_inTweet, _outTweet){
   return returnTweet;
 }
 
+
+
 angular.module('starter.controllers', [])
 .controller('tweetCtrl', function($scope, Tweet, TwitterService, $ionicModal, $ionicPlatform, $sce, $timeout) {
+  $scope.loading = true;
   Tweet.init().then(function(){
     TwitterService.initialize().then(function() {
       //Tweet.getRetweets();
       $scope.$on('retweetsReady', function(scopeInfo, data){
         console.log("retweet data", data);
       });
-      $scope.images = 
-        [
-          {path:'img/sad-stockphoto2.jpg', fact: "The average age of a young woman being trafficked is 12–14 years old."},
-          {path:'img/feet_in_chains_199358.jpg', fact: 'There are approximately 20 to 30 million slaves in the world today.'},
-          {path:'img/money-95793.jpg', fact: 'Human trafficking generates $9.5 billion yearly in the United States.'}
-        ];
-
       $scope.tweets = [];
       $scope.tweetlist = [
         'You know what it is. #rpgo tinyurl.com/qx8jero', 
@@ -37,7 +32,7 @@ angular.module('starter.controllers', [])
       ];
     	$scope.$on('tweetReady', function(scopeInfo, newTweet) {
         if (!newTweet.image) {
-          var image = $scope.images[Math.floor(Math.random() * $scope.images.length)];
+          var image = IMAGES[Math.floor(Math.random() * IMAGES.length)];
           newTweet.image = image;
         }
         console.log('new tweet', newTweet);
@@ -50,7 +45,11 @@ angular.module('starter.controllers', [])
       $scope.$on('retweetsReady', function(scopeInfo, replies) {
         $scope.replies = replies;
       });
-    	Tweet.getTweet(window.localStorage.getItem('lastId') || '0');  
+
+    	Tweet.getTweet(window.localStorage.getItem('lastId') || '0');
+      $timeout(function(){
+        $scope.loading = false;
+      }, 500);
 
       $scope.skip = function() {
         var lastId = $scope.tweets[0].id;
