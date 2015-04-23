@@ -18,8 +18,8 @@ function appendHashTags(_inTweet, _outTweet){
 angular.module('starter.controllers', [])
 .controller('tweetCtrl', function($scope, Tweet, TwitterService, $ionicModal, $ionicPlatform, $sce, $timeout) {
   $scope.loading = true;
-  Tweet.init().then(function(){
-    TwitterService.initialize().then(function() {
+  TwitterService.initialize().then(function() {
+    Tweet.init().then(function(){
       //Tweet.getRetweets();
       $scope.$on('retweetsReady', function(scopeInfo, data){
         console.log("retweet data", data);
@@ -31,6 +31,7 @@ angular.module('starter.controllers', [])
         'She is worth it. #rpgo tinyurl.com/qx8jero'
       ];
     	$scope.$on('tweetReady', function(scopeInfo, newTweet) {
+        $scope.loading = false;
         if (!newTweet.image) {
           var image = IMAGES[Math.floor(Math.random() * IMAGES.length)];
           newTweet.image = image;
@@ -47,9 +48,6 @@ angular.module('starter.controllers', [])
       });
 
     	Tweet.getTweet(window.localStorage.getItem('lastId') || '0');
-      $timeout(function(){
-        $scope.loading = false;
-      }, 500);
 
       $scope.skip = function() {
         var lastId = $scope.tweets[0].id;
