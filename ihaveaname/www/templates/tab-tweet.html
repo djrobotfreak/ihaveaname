@@ -2,10 +2,6 @@
   <ion-content class="padding">
     <div ng-hide="loading">
       <div class="list card tweetItem" ng-repeat="tweet in tweets | limitTo:1">
-        <div id="rotating-image">
-          <img ng-src="{{tweet.image.path}}">
-          <div id="image-fact"><p>{{tweet.image.fact}}</p></div>
-        </div>
         <div class="item item-body">
           <span ng-bind-html="tweet.text | tweetLinky">
           </span>
@@ -16,6 +12,10 @@
           </button><button class="button button-block button-positive" ng-click="openModal()">
             Respond
           </button>
+        </div>
+        <div id="rotating-image">
+          <img ng-src="{{tweet.image.path}}">
+          <div id="image-fact"><p>{{tweet.image.fact}}</p></div>
         </div>
       </div>
       <div class="list card" ng-hide="tweets.length">

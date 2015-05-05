@@ -14,7 +14,15 @@ TWEET_AUTHENTICATION = {
 
 IMAGES = 
 [
-  {path:'img/sad-stockphoto2.jpg', fact: "The average age of a young woman being trafficked is 12–14 years old."},
-  {path:'img/feet_in_chains_199358.jpg', fact: 'There are approximately 20 to 30 million slaves in the world today.'},
-  {path:'img/money-95793.jpg', fact: 'Human trafficking generates $9.5 billion yearly in the United States.'}
+  {path:'img/IMG_20150501_150207.jpg'},
+  {path:'img/IMG_20150501_133743.jpg'},
+  {path:'img/IMG_20150502_082644.jpg'},
+  {path:'img/IMG_20150502_085608.jpg'},
+  {path:'img/IMG_20150427_153828.jpg'},
+  {path:'img/IMG_20150430_222653.jpg'},
+  {path:'img/IMG_20150430_223657.jpg'},
+  {path:'img/IMG_20150501_140708.jpg'},
+  {path:'img/IMG_20150501_143313.jpg'},
+  {path:'img/IMG_20150502_092959.jpg'},
+  {path:'img/IMG_20150502_090713.jpg'}
 ];

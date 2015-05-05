@@ -27,7 +27,7 @@ angular.module('starter.controllers', [])
       $scope.tweets = [];
       $scope.tweetlist = [
         'You know what it is. #rpgo tinyurl.com/qx8jero', 
-        'Real People Getting Oppressed #rpgo tinyurl.com/qx8jero', 
+        'Somebody come get her. #rpgo tinyurl.com/qx8jero', 
         'She is worth it. #rpgo tinyurl.com/qx8jero'
       ];
     	$scope.$on('tweetReady', function(scopeInfo, newTweet) {
