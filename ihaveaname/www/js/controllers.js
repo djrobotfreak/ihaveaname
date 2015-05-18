@@ -20,7 +20,7 @@ angular.module('starter.controllers', [])
   $scope.loading = true;
   TwitterService.initialize().then(function() {
     Tweet.init().then(function(){
-      //Tweet.getRetweets();
+      Tweet.getRetweets();
       $scope.$on('retweetsReady', function(scopeInfo, data){
         console.log("retweet data", data);
       });
@@ -44,7 +44,11 @@ angular.module('starter.controllers', [])
     	});
 
       $scope.$on('retweetsReady', function(scopeInfo, replies) {
-        $scope.replies = replies;
+        var newList = [];
+        for (var i = 0; i < replies.retweets.length; i++) {
+          newList.push(replies.retweets[i] + ' ' + replies.urls[i]);
+        }
+        $scope.tweetlist = newList;
       });
 
     	Tweet.getTweet(window.localStorage.getItem('lastId') || '0');
@@ -96,6 +100,7 @@ angular.module('starter.controllers', [])
               $scope.modal.remove();
               delete $scope.modal;
               $timeout(function() {
+                Tweet.getRetweets();
                 $scope.skip();
               }, 100);
             });

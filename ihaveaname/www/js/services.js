@@ -51,7 +51,7 @@ angular.module('starter.services', [])
           });
       },
       getRetweets: function() {
-        $http.get(serviceBase + 'api/Twitter/getRetweetList/').
+        $http.get(serviceBase + 'api/Twitter/GetRetweetsAndUrls/3').
             success(function(data, status, headers, config) {
                 $rootScope.$broadcast('retweetsReady', data);
             }).
